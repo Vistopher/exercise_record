@@ -1,12 +1,11 @@
 //5.16
-//不明白为什么有bug ，输出始终为0；帆帆说要教我算法相关
 #include <iostream>
 using namespace std;
 
 int main() {
 	cout << "Enter 2 intergers.\n";
 	int a, b, d, i;
-	cin >> a, b;
+	cin >> a >> b;
 
 	if (a < b)
 		d = a;
@@ -189,7 +188,7 @@ int main() {
 	return 0;
 }
 
-//5.31格式化输出
+//5.31格式化输出(网上答案）
 #include <iostream>
 #include <string>
 using namespace std;
@@ -283,5 +282,103 @@ defaule:
 		}
 		cout << "\n\n";
 	}
+	return 0;
+}
+
+//5.31格式化输出
+//自己写了一遍，可能算另一种方法吧大概
+#include <iostream>
+#include <iomanip>
+using namespace std;
+int main() {
+	cout << "Enter the year and the weekday of the first day." << endl;
+	int year, firstday;
+	cin >> year >> firstday;
+
+	int month, daysofmonth;
+	for (month = 1; month <= 12; month++) {
+		daysofmonth = 31;
+		switch (month) {
+			case 1:
+				cout << right;
+				cout << setw(15) << "\t" << "January " << year << endl;
+				break;
+			case 2:
+				cout << right;
+				cout << setw(15) << "\t" << "February " << year << endl;
+				if (year % 40 == 0 && year % 100 || year % 4000 == 0)
+					daysofmonth = 29;
+				else
+					daysofmonth = 28;
+				break;
+			case 3:
+				cout << right;
+				cout << setw(15) << "\t" << "March " << year << endl;
+				break;
+			case 4:
+				cout << right;
+				cout << setw(15) << "\t" << "April " << year << endl;
+				daysofmonth = 30;
+				break;
+			case 5:
+				cout << right;
+				cout << setw(15) << "\t" << "May " << year << endl;
+				break;
+			case 6:
+				cout << right;
+				cout << setw(15) << "\t" << "June " << year << endl;
+				daysofmonth = 30;
+				break;
+			case 7:
+				cout << right;
+				cout << setw(15) << "\t" << "July " << year << endl;
+				break;
+			case 8:
+				cout << right;
+				cout << setw(15) << "\t" << "August " << year << endl;
+				break;
+			case 9:
+				cout << right;
+				cout << setw(15) << "\t" << "September " << year << endl;
+				daysofmonth = 30;
+				break;
+			case 10:
+				cout << right;
+				cout << setw(15) << "\t" << "Obtober" << year << endl;
+				break;
+			case 11:
+				cout << right;
+				cout << setw(15) << "\t" << "November " << year << endl;
+				daysofmonth = 30;
+				break;
+			case 12:
+				cout << right;
+				cout << setw(15) << "\t" << "December" << year << endl;
+				break;
+		}
+
+		cout << setw(3) << "Sun" << setw(3) << "\tMon" << setw(3) << "\tTue" <<
+		     setw(3) << "\tWed" << setw(3) << "\tThu" << setw(3) << "\tFri" << setw(3) << "\tSat" << endl;
+
+
+		for (int i = 1; i <= firstday % 7; i++ ) {
+			cout << setw(3) << "\t";
+		}
+		cout << "1";
+
+		for (int j = 2; j <= daysofmonth; j++) {
+			int m = 8 - firstday;//第一列的数
+			cout << setw(3) << "\t";
+			if (j == m || j == m + 7 || j == m + 14 || j == m + 21 || j == m + 28)
+				cout << "\n";
+			cout << j;
+		}
+		cout << "\n" << "\n";
+
+		firstday = ((daysofmonth + 1) + (firstday % 7) - 1) % 7; //下个月的第一天所在列数
+		if (firstday == 0)
+			firstday += 7;//当所在列数为7时，恢复输入格式
+	}
+
 	return 0;
 }
